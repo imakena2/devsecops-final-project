@@ -1,0 +1,252 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header Styles */
+header {
+    background: #24292e;
+    color: #fff;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+}
+
+/* Navigation Styles */
+nav {
+    margin-top: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+nav a i {
+    margin-right: 0.5rem;
+    width: 1.25rem;
+    text-align: center;
+}
+
+nav a:hover {
+    background-color: #333;
+}
+
+/* Social Icons Styles */
+.social-icons {
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    color: #fff;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: #508AA8;
+}
+
+/* Content Styles */
+.content {
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+section {
+    margin-bottom: 2rem;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #508AA8;
+    border-bottom: 2px solid #508AA8;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+/* About Section */
+#about p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Experience Section */
+.job-entry {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.job-entry:last-child {
+    border-bottom: none;
+}
+
+.job-entry h3 {
+    color: #346173;
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+}
+
+.job-dates {
+    font-style: italic;
+    color: #777;
+    margin-bottom: 0.75rem;
+}
+
+.job-entry ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+}
+
+.job-entry li {
+    margin-bottom: 0.5rem;
+}
+
+/* Education Section */
+.education-entry {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.education-entry:last-child {
+    border-bottom: none;
+}
+
+.education-entry h3 {
+    color: #346173;
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+}
+
+.institution-name {
+    font-style: italic;
+    color: #777;
+}
+
+/* Certifications Section */
+.certification-entry {
+    margin-bottom: 0.75rem;
+}
+
+/* Contact Section */
+#contact p {
+    margin-bottom: 0.75rem;
+}
+
+#contact a {
+    color: #508AA8;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+#contact a:hover {
+    color: #6B5B95;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #24292e;
+    color: #fff;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+/* Media Queries for Responsive Design */
+@media only screen and (max-width: 768px) {
+    header {
+        padding: 0.5rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    section h2 {
+        font-size: 1.75rem;
+    }
+}
