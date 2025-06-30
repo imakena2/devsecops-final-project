@@ -1,0 +1,84 @@
+# Default values for devsecops-chart.
+# Declare variables to be passed into your templates.
+
+# Number of application replicas
+replicaCount: 1
+
+# Container image settings
+image:
+  repository: devsecops-node-app
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+# Secret for pulling from private registries (if needed)
+imagePullSecrets: []
+
+# Override chart name
+nameOverride: ""
+fullnameOverride: ""
+
+# ServiceAccount configuration
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+# Pod annotations and labels
+podAnnotations: {}
+podLabels: {}
+
+# Pod-level security context
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# Container-level security context
+securityContext: {}
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# Kubernetes Service configuration
+service:
+  type: ClusterIP
+  port: 3000
+
+# Ingress (disabled by default)
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+# Resource requests & limits (empty by default)
+resources: {}
+
+# Liveness & readiness probes
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+# Horizontal Pod Autoscaler (disabled by default)
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+# Extra volumes & mounts (if needed)
+volumes: []
+volumeMounts: []
+
+# Node scheduling directives
+nodeSelector: {}
+tolerations: []
+affinity: {}
