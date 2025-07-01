@@ -2,17 +2,11 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub-idah') // This must match Jenkins Credentials ID
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub-idah')
     IMAGE_NAME = "imakena/devsecops-app"
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        git 'https://github.com/imakena2/devsecops-final-project.git'
-      }
-    }
-
     stage('Build Docker Image') {
       steps {
         sh 'docker build -t $IMAGE_NAME .'
