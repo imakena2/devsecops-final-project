@@ -6,7 +6,7 @@ replicaCount: 1
 
 # Container image settings
 image:
-  repository: devsecops-node-app
+  repository: imakena/devsecops-app
   pullPolicy: IfNotPresent
   tag: "latest"
 
