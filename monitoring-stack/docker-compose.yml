@@ -1,11 +1,6 @@
-services:
-  myapp:
-    image: devsecops-nginx
-    ports:
-      - "3001:80"
-    networks:
-      - monitoring-net
+version: '3.8'
 
+services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -13,8 +8,6 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
-    networks:
-      - monitoring-net
 
   grafana:
     image: grafana/grafana
@@ -23,11 +16,12 @@ services:
       - "3000:3000"
     volumes:
       - grafana-storage:/var/lib/grafana
-    networks:
-      - monitoring-net
+
+  myapp:
+    image: myapp-image
+    container_name: myapp
+    ports:
+      - "8080:3000"  # hostPort:containerPort
 
 volumes:
   grafana-storage:
-
-networks:
-  monitoring-net:
