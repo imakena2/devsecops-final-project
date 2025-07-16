@@ -1,209 +1,144 @@
-# DevSecOps Final Project
+# DevSecOps Final Project Report
 
-This project demonstrates a complete **DevSecOps pipeline** integrating key tools and practices from development to deployment. It focuses on containerized application deployment using **Kubernetes** and **Helm**, running locally on **Minikube** and deployed via **AWS S3** for production.
+**Student Name:** Idah Makena Ncooro  
+**Institution:** Strathmore University  
+**Project Title:** End-to-End DevSecOps Implementation Using Kubernetes, Jenkins, SonarQube, and AWS
 
 ---
 
-## ✅ Project Structure (Steps Completed)
+## ⚑ Project Overview
 
-### **Step 1: Project Initialization**
+This project demonstrates a complete **DevSecOps pipeline** applied to a **personal portfolio web application**, with the goal of integrating security into the development and deployment lifecycle. The solution utilizes **Kubernetes (Minikube)** for container orchestration and **AWS S3** for hosting the production-ready web application. Key DevSecOps tools like **Jenkins**, **SonarQube**, **OWASP ZAP**, **Docker**, **Helm**, and **Grafana** were integrated to cover CI/CD, SAST, DAST, monitoring, and deployment.
 
-- Set up project folder `devsecops-final-project`.
-- Initialized Git for version control.
-- Installed and configured:
-  - Docker
-  - Minikube (Hyper-V driver for Windows compatibility)
-  - kubectl (Kubernetes CLI)
+---
 
-### **Step 2: Containerization**
+## 🎯 Project Objectives
 
-- Created a `Dockerfile` for a basic Nginx application.
-- Built a Docker image:
+- ✅ Apply DevSecOps principles to a real-world application.
+- ✅ Containerize the portfolio web app using Docker.
+- ✅ Automate the CI/CD pipeline using Jenkins.
+- ✅ Deploy the application on Kubernetes (Minikube locally).
+- ✅ Ensure code and runtime security using tools like SonarQube and OWASP ZAP.
+- ✅ Host the final build of the portfolio website on **AWS S3** for public access.
+- ✅ Visualize metrics using Grafana and Prometheus for performance monitoring.
+
+---
+
+## 🧱 Project Workflow
+
+### 1. Project Setup
+- Git initialized in folder `devsecops-final-project`.
+- Tools installed: Docker, Jenkins, Minikube, Helm, Kubectl, SonarQube, Prometheus, Grafana.
+
+### 2. Containerization
+- Created a `Dockerfile` for the portfolio web app.
+- Built Docker image:
   ```bash
   docker build -t devsecops-nginx .
   ```
 
-### **Step 3: CI/CD Pipeline with Jenkins**
+### 3. CI/CD Pipeline with Jenkins
+- Jenkins running in a Docker container.
+- `Jenkinsfile` automates:
+  - GitHub code checkout
+  - Docker image build & push
+  - Helm-based deployment to Minikube
 
-- Set up **Jenkins** locally using Docker.
-- Configured a Jenkins pipeline using `Jenkinsfile`:
-  - Builds Docker image
-  - Pushes to Docker Hub
-  - Triggers deployment to Kubernetes
-
-### **Step 4: Kubernetes Deployment**
-
-- Minikube used to run Kubernetes cluster locally.
-- Created Helm chart to deploy app to Kubernetes.
-- Used `kubectl` and `helm` for deployment.
+### 4. Kubernetes Deployment with Helm
+- Created custom Helm charts.
+- Deployed app using `kubectl` and Helm.
 
 ---
 
-## 🔄 CI/CD Architecture
+## 🔐 Security Integration
 
-- GitHub (Source Repository)
-- Jenkins (CI/CD Pipeline)
-- Docker Hub (Image Registry)
-- Kubernetes via Minikube (Deployment Target)
-- Helm (Package Manager for Kubernetes)
+### ✅ Static Application Security Testing (SAST) - SonarQube
+- Installed locally with Docker.
+- Used `sonar-scanner` and `sonar-project.properties`.
+- Detected bugs, code smells, vulnerabilities.
 
----
-
-## 🛡️ Static Code Analysis (SAST) with SonarQube
-
-We integrated **SonarQube** to perform **Static Application Security Testing (SAST)** to ensure code quality and detect security vulnerabilities.
-
-### ✅ Setup Summary:
-
-- **Tool Used:** SonarQube (Community Edition)
-- **Executed via:** `sonar-scanner`
-- **Analysis Includes:**
-  - Code smells
-  - Bugs
-  - Vulnerabilities
-  - Test coverage with Jest
-
-### 📁 Configuration Highlights:
-
-In `sonar-project.properties`:
-
-```properties
-sonar.projectKey=devsecops-app
-sonar.host.url=http://localhost:9000
-sonar.token=<your-token>
-sonar.sources=.
-sonar.javascript.lcov.reportPaths=coverage/lcov.info
-```
-
-> Replace `<your-token>` with the actual SonarQube token or use an environment variable.
-
-### 📊 Report & Dashboard:
-
-Access full analysis on the local SonarQube instance: 👉 [SonarQube Dashboard for DevSecOps App](http://localhost:9000/dashboard?id=devsecops-app)
+### ✅ Dynamic Application Security Testing (DAST) - OWASP ZAP
+- Ran ZAP Docker container:
+  ```bash
+  docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable \
+  zap-baseline.py -t http://devsecops-website-project-portfolio.s3-website-us-east-1.amazonaws.com/ -r zap-report.html
+  ```
+- Scanned for XSS, broken auth, missing headers, etc.
 
 ---
 
-## 🔍 Dynamic Application Security Testing (DAST)
+## 📊 Monitoring and Logging
 
-We performed **DAST** to test the running application for vulnerabilities in a black-box manner.
-
-### ✅ Tool Used: OWASP ZAP
-
-- **Scan Method:** Baseline scan using ZAP Docker image
-- **Target:** Application deployed on Minikube or AWS S3
-
-### 🛠️ Execution:
-
-```bash
-docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable   zap-baseline.py -t http://devsecops-website-project-portfolio.s3-website-us-east-1.amazonaws.com/ -r zap-report.html
-```
-
-### 📄 Report:
-
-- HTML report generated: `zap-report.html`
-- Includes detection of:
-  - XSS
-  - Broken Authentication
-  - Sensitive Data Exposure
-  - Security Header Issues
+- Used Prometheus to collect Kubernetes metrics.
+- Configured Grafana dashboards for visualization.
 
 ---
 
-## 📈 Monitoring with Grafana
+## 🌐 Deployed Application on AWS S3
 
-To monitor application performance and infrastructure:
+My personal portfolio web application is successfully deployed and accessible via:
 
-- **Prometheus** used as a data source.
-- **Grafana** for dashboards and visualization.
-- Exported metrics from Kubernetes pods.
+### → [Live Portfolio Website](http://devsecops-website-project-portfolio.s3-website-us-east-1.amazonaws.com/)
 
-### 📸 Dashboard Screenshot
-
-*Include screenshot image or link here.*
-
----
-
-## ☁️ Deployment Target
-
-- **Primary Option:** Minikube (for local development/testing)
-- **Production Deployment:** AWS S3 (Static Website Hosting)
-
-### 🔗 AWS S3 Deployment Steps
-
-1. Created an S3 bucket `devsecops-website-project-portfolio`.
-2. Enabled static website hosting.
-3. Uploaded static build files (`index.html`, CSS, JS).
-4. Configured public access policy.
-5. Deployed at:
-
-👉 **[Live Project on AWS S3](http://devsecops-website-project-portfolio.s3-website-us-east-1.amazonaws.com/)**
+Deployment steps:
+- Created S3 bucket and enabled static hosting.
+- Uploaded `index.html` and assets.
+- Set bucket policies for public access.
 
 ---
 
-## 📦 Deliverables
+## ✨ Achievements
 
-### 📌 Project Plan
-
-- Agile board screenshots from Trello or Jira
-
-### 📄 Documentation (README.md)
-
-Includes:
-
-- Project Overview
-- SDLC Model used (Agile)
-- CI/CD Pipeline Architecture
-- Security Implementations (SAST, DAST, containerization)
-
-### 💻 GitHub Repository
-
-- Application Source Code
-- `Dockerfile`
-- `Jenkinsfile`
-- `sonar-project.properties`
-- `Helm` charts
-
-### 🎥 Working Demo
-
-- Video walkthrough or live demo link
-
-### 📊 Performance Dashboard
-
-- Screenshot from Grafana dashboard
-
-### 📄 Security Test Reports
-
-- SonarQube analysis results
-- ZAP HTML report
+- ✅ Built a secure CI/CD pipeline from scratch.
+- ✅ Gained hands-on experience with advanced DevSecOps tools.
+- ✅ Deployed a production-ready portfolio app on AWS S3.
+- ✅ Integrated automated security testing.
+- ✅ Configured performance dashboards with Grafana.
 
 ---
 
-## 👨‍💻 Technologies Used
+## ⚠️ Challenges Faced
 
-- Docker
-- Kubernetes (Minikube)
-- Jenkins
-- SonarQube
-- OWASP ZAP
-- Helm
-- Grafana + Prometheus
-- AWS S3
-- JavaScript (Node.js/React depending on app)
+- 📚 Required extensive research and tool documentation.
+- 🤀 Complex configurations with Jenkins, Helm, and Minikube.
+- 🔐 Setting up and integrating security tools took time.
+- ⛅️ Steep learning curve on cloud services and container orchestration.
 
 ---
 
-## ✅ Next Steps
+## 💡 Lessons Learned
 
-- Perform **Dynamic Analysis (DAST)** (✔️ Done)
-- Configure security scanning in CI (e.g., Trivy, Snyk)
-- Implement RBAC policies for Kubernetes
-- Automate security testing in pipeline
-- Integrate Selenium for automated browser testing (optional)
+- ⛔ Security should be integrated early and continuously.
+- ⚙️ Each DevSecOps tool has a distinct role.
+- 🔍 Monitoring helps maintain system health and performance.
+- 💬 Collaboration is vital in DevOps practices.
+- ☁️ AWS services offer reliable, scalable, and fast deployment platforms.
 
 ---
 
-## 🙌 Author
+## 📅 Deliverables Summary
 
-**Idah Makena Ncooro**
+| Deliverable | Description |
+|------------|-------------|
+| Source Code | Available on GitHub (link) |
+| Jenkinsfile | CI/CD pipeline automation |
+| Dockerfile | Portfolio image build |
+| Sonar Project File | SAST config |
+| Helm Charts | Kubernetes deployment |
+| ZAP Report | DAST scan summary |
+| Grafana Dashboard | Metrics visualization |
+| Deployed App | [Click to View](http://devsecops-website-project-portfolio.s3-website-us-east-1.amazonaws.com/) |
+| Demo Video | (Insert Link) |
+| Trello Board | (Insert Screenshot or Link) |
 
-> DevSecOps Final Project | Strathmore University
+---
+
+## 🙌 Conclusion
+
+This DevSecOps project has been a transformative learning experience. I was able to develop, secure, monitor, and deploy a fully functional web application using modern tools and best practices. It has equipped me with practical skills necessary for real-world DevSecOps environments.
+
+---
+
+**Prepared by:**  
+**Idah Makena Ncooro**  
+*Strathmore University*
